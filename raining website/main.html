@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rain Animation</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1a1a2e;
+        }
+        .raindrop {
+            position: absolute;
+            bottom: 100%;
+            width: 2px;
+            height: 15px;
+            background: #00aaff;
+            animation: fall 1s linear infinite;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center h-screen overflow-hidden">
+    <div id="rain-container" class="absolute inset-0"></div>
+    <script>
+        const rainContainer = document.getElementById('rain-container');
+        function createRaindrop() {
+            const raindrop = document.createElement('div');
+            raindrop.className = 'raindrop';
+            raindrop.style.left = `${Math.random() * 100}vw`;
+            raindrop.style.animationDuration = `${Math.random() * 0.5 + 0.5}s`;
+            rainContainer.appendChild(raindrop);
+
+            setTimeout(() => {
+                rainContainer.removeChild(raindrop);
+            }, 1000);
+        }
+
+        setInterval(createRaindrop, 100);
+    </script>
+</body>
+</html>
